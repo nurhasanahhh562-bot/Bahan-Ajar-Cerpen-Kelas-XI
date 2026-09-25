@@ -1,0 +1,8 @@
+[build]
+  # Folder yang berisi file-file statis situs Anda (HTML, CSS, gambar, dst).
+  # Karena situs ini cuma satu file HTML di root, kita pakai "." (folder utama).
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"

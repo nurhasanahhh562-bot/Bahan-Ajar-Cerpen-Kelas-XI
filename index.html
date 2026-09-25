@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bengkel Cerpen · Bahan Ajar Cerita Pendek Kelas XI SMA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FAF8FF;
+    --bg-deep: #F1ECFF;
+    --surface: #FFFFFF;
+    --line: #E8E1F7;
+    --ink: #211A38;
+    --ink-soft: #5C5478;
+    --ink-faint: #9992AE;
+
+    --pink: #FF3D77;
+    --pink-soft: #FFE1EC;
+    --teal: #00BFA6;
+    --teal-soft: #CFF7EF;
+    --yellow: #FFBB1C;
+    --yellow-soft: #FFF1C7;
+    --purple: #7A5AF8;
+    --purple-soft: #EAE2FF;
+
+    --gold: var(--yellow);
+    --gold-soft: var(--yellow-soft);
+    --red: var(--pink);
+    --red-soft: var(--pink-soft);
+    --green: var(--teal);
+    --green-soft: var(--teal-soft);
+    --paper-line: var(--line);
+
+    --shadow: 0 10px 26px rgba(122,90,248,0.16);
+    --shadow-sm: 0 4px 12px rgba(122,90,248,0.14);
+    --radius: 18px;
+    --radius-sm: 12px;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 6% 8%, var(--purple-soft) 0, transparent 40%),
+      radial-gradient(circle at 96% 4%, var(--pink-soft) 0, transparent 32%),
+      radial-gradient(circle at 92% 88%, var(--teal-soft) 0, transparent 30%);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:.02em; }
+  h1,h2,h3,h4{ font-family:'Baloo 2', sans-serif; font-weight:700; margin:0 0 .4em; color:var(--ink); }
+  a{ color: var(--pink); font-weight:700; }
+  button{ font-family: inherit; cursor:pointer; }
+  ::selection{ background: var(--yellow-soft); }
+
+  .app{ min-height:100vh; display:flex; flex-direction:column; }
+
+  .topbar{
+    display:flex; align-items:center; gap:.9rem;
+    padding: 1.2rem 1.6rem;
+    background: linear-gradient(120deg, var(--purple), var(--pink) 70%);
+    color: #fff;
+    border-bottom: none;
+    box-shadow: 0 6px 20px rgba(122,90,248,.28);
+  }
+  .brand-mark{
+    font-size: 1.9rem;
+    display:inline-block;
+    transform: rotate(-10deg);
+    background: rgba(255,255,255,.22);
+    width: 2.6rem; height: 2.6rem;
+    border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .topbar h1{ color:#fff; font-size:1.35rem; margin:0; }
+  .topbar p{ color: #FFF0D6; font-size:.78rem; margin:.2rem 0 0; font-weight:700; }
+
+  .layout{ flex:1; display:flex; max-width:1180px; margin:0 auto; width:100%; }
+
+  .sidebar{
+    width: 240px; flex-shrink:0;
+    padding: 1.4rem .9rem;
+    border-right: none;
+    display:flex; flex-direction:column; gap:.4rem;
+  }
+  .tab{
+    display:flex; align-items:center; gap:.7rem;
+    background: var(--surface); border:2px solid transparent;
+    text-align:left;
+    padding: .65rem .9rem;
+    border-radius: var(--radius-sm);
+    font-family:'JetBrains Mono', monospace;
+    font-size:.72rem; font-weight:700;
+    color: var(--ink-soft);
+    box-shadow: 0 2px 0 var(--line);
+    transition: transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease, box-shadow .15s ease;
+  }
+  .tab .mono{
+    width: 1.9rem; height:1.9rem; flex-shrink:0;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background: var(--purple-soft); color:var(--purple); font-size:.68rem;
+  }
+  .tab:nth-child(2) .mono{ background:var(--pink-soft); color:var(--pink); }
+  .tab:nth-child(3) .mono{ background:var(--teal-soft); color:var(--teal); }
+  .tab:nth-child(4) .mono{ background:var(--yellow-soft); color:#946200; }
+  .tab:nth-child(5) .mono{ background:var(--purple-soft); color:var(--purple); }
+  .tab:nth-child(6) .mono{ background:var(--pink-soft); color:var(--pink); }
+  .tab span{
+    font-family:'Nunito', sans-serif; font-weight:700; font-size:1rem;
+    letter-spacing:0; color: inherit;
+  }
+  .tab:hover{ transform: translateY(-1px); box-shadow: 0 6px 0 var(--line); }
+  .tab.active{
+    color: #fff; border-color: transparent;
+    background: linear-gradient(120deg, var(--pink), var(--purple));
+    box-shadow: 0 4px 0 rgba(122,90,248,.35);
+    transform: translateY(-1px);
+  }
+  .tab.active .mono{ background: rgba(255,255,255,.28); color:#fff; }
+  .tab:focus-visible{ outline: 3px solid var(--yellow); outline-offset:1px; }
+
+  .content{ flex:1; padding: 2.2rem 2.6rem 5rem; min-width:0; }
+  .panel{ display:none; animation: fade .35s ease; }
+  .panel.active{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+
+  .eyebrow{
+    font-family:'Baloo 2', sans-serif; font-size:.78rem; font-weight:700;
+    color: var(--purple); letter-spacing:.01em;
+    margin-bottom:.6rem; display:inline-block;
+    background: var(--purple-soft); padding:.3rem .8rem; border-radius: 999px;
+  }
+  .lede{ font-size:1.08rem; color: var(--ink-soft); max-width:62ch; }
+
+  /* ---- Beranda ---- */
+  .cp-list{ list-style:none; margin:1.2rem 0; padding:0; display:grid; gap:.7rem; }
+  .cp-list li{
+    background: var(--surface); border:2px solid var(--line);
+    padding:.85rem 1.1rem; border-radius: var(--radius-sm);
+    display:flex; gap:.7rem; align-items:flex-start;
+    box-shadow: var(--shadow-sm);
+  }
+  .cp-list li:nth-child(1){ border-color: var(--pink-soft); }
+  .cp-list li:nth-child(2){ border-color: var(--teal-soft); }
+  .cp-list li:nth-child(3){ border-color: var(--yellow-soft); }
+  .cp-list li:nth-child(4){ border-color: var(--purple-soft); }
+  .cp-list li::before{
+    content:"✦"; color: var(--pink); font-weight:700; flex-shrink:0;
+  }
+
+  .arc-wrap{ margin:2.4rem 0; background:var(--surface); border-radius: var(--radius); padding:1.4rem; box-shadow: var(--shadow-sm); }
+  .arc-caption{ font-family:'Nunito', sans-serif; font-size:.85rem; color:var(--ink-soft); margin-top:.5rem; }
+
+  .howto{ list-style:none; padding:0; margin:1.2rem 0; display:grid; gap:1rem; counter-reset: step; }
+  .howto li{
+    counter-increment: step;
+    display:grid; grid-template-columns:2.4rem 1fr; gap:.9rem; align-items:flex-start;
+  }
+  .howto li::before{
+    content: counter(step);
+    width:2.4rem; height:2.4rem; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Baloo 2', sans-serif; color: #fff; font-weight:700; font-size:1rem;
+    background: linear-gradient(135deg, var(--teal), var(--purple));
+  }
+
+  /* ---- Materi accordion ---- */
+  details.acc{
+    border: 2px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: .3rem 1rem;
+    margin-bottom: .7rem;
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+  }
+  details.acc summary{
+    list-style:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    font-family:'Baloo 2', sans-serif; font-weight:700; font-size:1.08rem; color:var(--ink);
+    padding: .8rem 0;
+  }
+  details.acc summary::-webkit-details-marker{ display:none; }
+  details.acc summary::after{
+    content:"+"; font-family:'Baloo 2', sans-serif; color:#fff;
+    font-size:1.1rem; flex-shrink:0; font-weight:700;
+    width:1.7rem; height:1.7rem; border-radius:50%;
+    background: var(--purple);
+    display:flex; align-items:center; justify-content:center;
+  }
+  details.acc[open] summary::after{ content:"−"; background: var(--pink); }
+  details.acc .acc-body{ padding: 0 .1rem 1rem; color: var(--ink-soft); max-width:66ch; }
+  details.acc .acc-body p{ margin:.4rem 0; }
+  .tag{
+    display:inline-block; font-family:'JetBrains Mono', monospace; font-size:.68rem; font-weight:700;
+    background: var(--teal-soft); color: #05715F; padding:.2rem .55rem;
+    border-radius: 999px; margin-right:.35rem;
+  }
+
+  /* ---- Contoh cerpen ---- */
+  .manuscript{
+    background: var(--surface); border:2px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 2rem 2.2rem; margin-top:1.6rem; max-width: 68ch;
+    position:relative; overflow:hidden;
+  }
+  .manuscript::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:8px;
+    background: linear-gradient(90deg, var(--pink), var(--yellow), var(--teal), var(--purple));
+  }
+  .manuscript h3{ font-size:1.5rem; color:var(--pink); margin-top:.4rem; }
+  .manuscript .byline{ font-family:'JetBrains Mono', monospace; font-size:.72rem; color:var(--ink-faint); margin-bottom:1.2rem; }
+  .manuscript p{ margin:0 0 1rem; }
+  .mark{
+    background: linear-gradient(transparent 62%, var(--teal-soft) 62%);
+    cursor: pointer; border-bottom: 2px dotted var(--teal);
+    transition: background .15s ease;
+  }
+  .mark:hover, .mark.on{ background: linear-gradient(transparent 55%, var(--yellow-soft) 55%); border-bottom-color: var(--pink); }
+  .note-panel{
+    margin-top:1.4rem; padding: 1rem 1.2rem; border-left:5px solid var(--pink);
+    border-radius: var(--radius-sm);
+    background: var(--surface); box-shadow: var(--shadow-sm); max-width:68ch;
+    min-height: 4.4rem;
+  }
+  .note-panel .note-label{
+    font-family:'Baloo 2', sans-serif; font-size:.78rem;
+    color: var(--pink); font-weight:700;
+  }
+  .note-panel p{ margin:.35rem 0 0; color: var(--ink-soft); }
+  .hint-row{ font-family:'Nunito', sans-serif; font-size:.8rem; color:var(--ink-faint); margin-top:.6rem; }
+
+  /* ---- Latihan / stepper ---- */
+  .steps-nav{ display:flex; gap:.5rem; margin: 1.4rem 0 2rem; flex-wrap:wrap; }
+  .step-dot{
+    font-family:'Baloo 2', sans-serif; font-size:.78rem; font-weight:700;
+    padding:.5rem 1rem; border:2px solid var(--purple-soft); background:var(--surface);
+    color: var(--ink-faint); border-radius: 999px;
+  }
+  .step-dot.current{ background: linear-gradient(120deg, var(--pink), var(--purple)); color:#fff; border-color:transparent; }
+  .step-dot.done{ background: var(--teal-soft); color: #05715F; border-color: var(--teal-soft); }
+
+  .step-panel{ display:none; }
+  .step-panel.active{ display:block; }
+
+  .field{ margin-bottom:1.2rem; max-width:64ch; }
+  .field label{ display:block; font-family:'Baloo 2', sans-serif; font-size:.85rem;
+    color: var(--purple); margin-bottom:.35rem; font-weight:700; }
+  .field textarea, .field input[type=text], .field select{
+    width:100%; font-family:'Nunito', sans-serif; font-size:1rem; color:var(--ink);
+    background:var(--surface); border:2px solid var(--line); border-radius: var(--radius-sm);
+    padding:.65rem .8rem; resize:vertical;
+  }
+  .field textarea:focus, .field input:focus, .field select:focus{
+    outline:none; border-color: var(--pink); box-shadow: 0 0 0 3px var(--pink-soft);
+  }
+  .field .help{ font-size:.82rem; color: var(--ink-faint); margin-top:.3rem; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:1rem 1.4rem; }
+  @media (max-width: 620px){ .grid2{ grid-template-columns:1fr; } }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:.5rem;
+    background: linear-gradient(120deg, var(--purple), var(--pink)); color:#fff; border:none;
+    padding:.7rem 1.4rem; font-size:.95rem; font-weight:700; border-radius: 999px;
+    font-family:'Baloo 2', sans-serif;
+    box-shadow: 0 4px 0 rgba(122,90,248,.35);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .btn:hover{ transform: translateY(-2px); box-shadow: 0 6px 0 rgba(122,90,248,.35); }
+  .btn:active{ transform: translateY(1px); box-shadow: 0 2px 0 rgba(122,90,248,.35); }
+  .btn.ghost{ background:var(--surface); color:var(--ink); border:2px solid var(--line); box-shadow:none; }
+  .btn.ghost:hover{ background: var(--purple-soft); transform:translateY(-1px); box-shadow:none; }
+  .btn.gold{ background: linear-gradient(120deg, var(--yellow), var(--pink)); box-shadow: 0 4px 0 #C98A00; }
+  .btn.gold:hover{ box-shadow: 0 6px 0 #C98A00; }
+  .btn:disabled{ opacity:.5; cursor:not-allowed; transform:none; }
+  .btn-row{ display:flex; gap:.7rem; margin-top:1.4rem; flex-wrap:wrap; }
+
+  .wc{ font-family:'JetBrains Mono', monospace; font-size:.78rem; color:var(--ink-faint); }
+
+  .toast{
+    position:fixed; bottom:1.4rem; right:1.4rem; background: linear-gradient(120deg, var(--purple), var(--pink)); color:#fff;
+    padding:.7rem 1.2rem; border-radius: 999px; font-family:'Baloo 2', sans-serif; font-weight:700;
+    font-size:.82rem; box-shadow: var(--shadow); opacity:0; transform: translateY(8px);
+    transition: opacity .25s ease, transform .25s ease; pointer-events:none; z-index:50;
+  }
+  .toast.show{ opacity:1; transform:none; }
+
+  /* ---- AI feedback ---- */
+  .ai-box{ margin-top:1.6rem; }
+  .ai-loading{ font-family:'Nunito', sans-serif; font-weight:700; font-size:.9rem; color:var(--ink-soft); display:flex; align-items:center; gap:.6rem; }
+  .spinner{ width:16px; height:16px; border:3px solid var(--purple-soft); border-top-color: var(--pink); border-radius:50%; animation: spin .8s linear infinite; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  .feedback-summary{
+    background: var(--yellow-soft); border-left:5px solid var(--yellow); border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    padding:1rem 1.2rem; margin-bottom:1.2rem; color: var(--ink); max-width:66ch; font-weight:700;
+  }
+  .score-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:.7rem; margin-bottom:1.4rem; max-width:68ch; }
+  .score-card{ background:var(--surface); border:2px solid var(--line); padding:.7rem .9rem; border-radius: var(--radius-sm); }
+  .score-card .label{ font-family:'Baloo 2', sans-serif; font-size:.78rem; color:var(--ink-soft); font-weight:700; }
+  .dots{ margin-top:.4rem; }
+  .dot{ display:inline-block; width:11px; height:11px; border-radius:50%; margin-right:5px; background: var(--line); }
+  .dot.fill{ background: var(--pink); }
+
+  .annot-list{ display:grid; gap:.8rem; max-width:68ch; }
+  .annot-card{ background:var(--surface); border-left:5px solid var(--pink); border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); padding:.85rem 1.1rem; }
+  .annot-card .aspek{ font-family:'Baloo 2', sans-serif; font-size:.78rem; color:var(--pink); font-weight:700; }
+  .annot-card .catatan{ margin:.4rem 0; color: var(--ink); }
+  .annot-card .saran{ color: #05715F; font-size:.92rem; font-weight:700; }
+  .annot-card .saran::before{ content:"→ "; }
+  .strengths{ background: var(--teal-soft); border-left:5px solid var(--teal); border-radius: var(--radius-sm); padding:.85rem 1.1rem; margin-bottom:1.2rem; max-width:68ch; }
+  .strengths .aspek{ font-family:'Baloo 2', sans-serif; font-size:.78rem; color:#05715F; font-weight:700; }
+  .strengths ul{ margin:.4rem 0 0; padding-left:1.1rem; }
+  .error-box{ background:var(--pink-soft); border-left:5px solid var(--pink); border-radius: var(--radius-sm); padding:.85rem 1.1rem; max-width:64ch; color:#8A1245; font-weight:700; }
+
+  /* ---- Catatan editor style feedback (Bab 04) ---- */
+  .aspek-chips{ display:flex; flex-wrap:wrap; gap:.5rem; margin: 0 0 1rem; max-width:68ch; }
+  .aspek-chip{
+    font-family:'Baloo 2', sans-serif; font-size:.8rem; font-weight:700;
+    padding:.45rem 1rem; border:2px solid var(--line); background:var(--surface);
+    color: var(--ink-soft); border-radius:999px; transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .aspek-chip:hover{ background:var(--purple-soft); color:var(--ink); }
+  .aspek-chip.on{ background:var(--pink); color:#fff; border-color:var(--pink); }
+  .feedback-note-panel .saran{ display:block; font-style:normal; color: #05715F; font-weight:700; margin-top:.6rem; }
+  .feedback-note-panel .saran::before{ content:"→ "; }
+
+  /* ---- Progres ---- */
+  .progress-list{ list-style:none; padding:0; margin:1.4rem 0; display:grid; gap:.7rem; max-width:60ch; }
+  .progress-list li{
+    display:flex; align-items:center; gap:.8rem;
+    background:var(--surface); border:2px solid var(--line); border-radius: var(--radius-sm);
+    padding:.8rem 1.1rem; box-shadow: var(--shadow-sm);
+  }
+  .check{
+    width:24px; height:24px; border-radius:50%; border:2px solid var(--purple-soft);
+    flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:.78rem; color:#fff;
+    background: var(--purple-soft); color: var(--purple); font-weight:700;
+  }
+  .check.on{ background: var(--teal); border-color: var(--teal); color:#fff; }
+  .progress-list .ptxt{ flex:1; }
+  .progress-list .ptxt strong{ display:block; font-size:.98rem; font-family:'Baloo 2', sans-serif; }
+  .progress-list .ptxt span{ font-size:.8rem; color:var(--ink-faint); font-family:'JetBrains Mono', monospace; }
+
+  /* ---- Glosarium & Daftar Pustaka ---- */
+  .glossary{ max-width:70ch; margin:1.2rem 0; }
+  .glossary dt{ font-family:'Baloo 2', sans-serif; font-weight:700; color:var(--pink); margin-top:.9rem; }
+  .glossary dd{ margin:.2rem 0 0; color:var(--ink-soft); }
+  .biblio{ max-width:70ch; margin:1.2rem 0; padding-left:1.2rem; display:grid; gap:.6rem; color:var(--ink-soft); }
+  .biblio li{ line-height:1.5; }
+
+  footer.foot{
+    text-align:center; padding:1.6rem; font-family:'JetBrains Mono', monospace;
+    font-size:.72rem; color: var(--ink-faint); border-top:2px solid var(--line);
+  }
+
+  @media (max-width: 860px){
+    .layout{ flex-direction:column; }
+    .sidebar{
+      width:100%; flex-direction:row; overflow-x:auto;
+      padding:.9rem 1rem; gap:.4rem;
+    }
+    .tab{ white-space:nowrap; padding:.55rem .9rem; }
+    .content{ padding: 1.6rem 1.2rem 4rem; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <span class="brand-mark">✏️</span>
+    <div>
+      <h1>Bengkel Cerpen</h1>
+      <p class="mono">Bahan Ajar Cerita Pendek Kelas XI SMA</p>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" id="sidebar">
+      <button class="tab active" data-tab="beranda"><span class="mono">01</span><span>Beranda</span></button>
+      <button class="tab" data-tab="materi"><span class="mono">02</span><span>Materi</span></button>
+      <button class="tab" data-tab="contoh"><span class="mono">03</span><span>Contoh Cerpen</span></button>
+      <button class="tab" data-tab="latihan"><span class="mono">04</span><span>Latihan Menulis</span></button>
+      <button class="tab" data-tab="progres"><span class="mono">05</span><span>Progres Belajar</span></button>
+      <button class="tab" data-tab="glosarium"><span class="mono">06</span><span>Glosarium &amp; Pustaka</span></button>
+    </nav>
+
+    <main class="content">
+
+      <!-- ============ BERANDA ============ -->
+      <section id="beranda" class="panel active">
+        <span class="eyebrow">Bengkel Cerpen · Bab 01</span>
+        <h2>Selamat datang di bengkel menulismu</h2>
+        <p class="lede">Di ruang ini kamu akan belajar membangun cerita pendek dari nol: mulai dari ide liar, kerangka cerita, draf pertama, sampai revisi, ditemani seorang pembimbing AI yang membaca dan memberi catatan seperti guru menandai naskah dengan pena merah.</p>
+
+        <h3 style="margin-top:2rem;">Capaian pembelajaran</h3>
+        <p class="lede" style="max-width:70ch;">Peserta didik mampu menulis gagasan, pikiran, pandangan, arahan, atau pesan tertulis untuk berbagai tujuan secara logis, kritis, dan kreatif dalam bentuk teks informasional dan/atau fiksi. Peserta didik mampu menulis berbagai jenis karya sastra secara kreatif, serta mampu menerbitkan hasil tulisan di media cetak maupun digital.</p>
+
+        <h3 style="margin-top:2rem;">Tujuan pembelajaran</h3>
+        <p class="lede" style="max-width:70ch;">Pembelajaran mendalam pada penulisan cerpen tidak sekadar merangkai kata, tetapi mengajak siswa memahami makna sosial/budaya, merenungkan nilai kehidupan, dan melatih keterlibatan emosional.</p>
+        <ul class="cp-list">
+          <li><strong>Memahami &amp; Menafsirkan Konteks:</strong> peserta didik mampu mengidentifikasi unsur intrinsik, struktur, dan isu nyata (sosial, budaya, atau sejarah) dari cerpen yang dibaca sebagai fondasi atau inspirasi penciptaan.</li>
+          <li><strong>Merancang Kerangka Kreatif:</strong> peserta didik mampu merancang alur, penokohan yang kuat, pilihan gaya bahasa/majas, dan sudut pandang yang selaras dengan pesan atau refleksi yang ingin disampaikan.</li>
+          <li><strong>Memproduksi Karya (Kreasi):</strong> peserta didik mampu menulis cerita pendek secara kreatif dengan penggunaan bahasa yang memikat, dialog yang hidup, serta detail indrawi yang tajam.</li>
+          <li><strong>Refleksi &amp; Publikasi:</strong> peserta didik mampu meninjau ulang, merevisi, dan memublikasikan karya cerpen mereka ke dalam antologi kelas, mading, atau platform digital.</li>
+        </ul>
+
+        <h3 style="margin-top:2rem;">Peta perjalanan sebuah cerita</h3>
+        <div class="arc-wrap">
+          <svg viewBox="0 0 720 220" width="100%" style="max-width:640px; height:auto;" role="img" aria-label="Diagram alur cerita berbentuk gunung: pengenalan, konflik, klimaks, penyelesaian">
+            <line x1="40" y1="190" x2="690" y2="190" stroke="#E8E1F7" stroke-width="2"/>
+            <path d="M40,170 L220,150 L400,40 L470,40 L690,175" fill="none" stroke="#FF3D77" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="40" cy="170" r="6" fill="#7A5AF8"/>
+            <circle cx="220" cy="150" r="6" fill="#7A5AF8"/>
+            <circle cx="400" cy="40" r="6" fill="#FFBB1C"/>
+            <circle cx="470" cy="40" r="6" fill="#FFBB1C"/>
+            <circle cx="690" cy="175" r="6" fill="#00BFA6"/>
+            <text x="20" y="205" font-family="JetBrains Mono, monospace" font-size="11" fill="#5C5478" font-weight="700">Pengenalan</text>
+            <text x="170" y="140" font-family="JetBrains Mono, monospace" font-size="11" fill="#5C5478" font-weight="700">Konflik muncul</text>
+            <text x="330" y="30" font-family="JetBrains Mono, monospace" font-size="11" fill="#FF3D77" font-weight="700">Klimaks</text>
+            <text x="590" y="200" font-family="JetBrains Mono, monospace" font-size="11" fill="#00BFA6" font-weight="700">Penyelesaian</text>
+          </svg>
+          <p class="arc-caption">Hampir setiap cerpen mengikuti irama ini: tenang, menegang, memuncak, lalu mereda. Kamu akan memakai peta ini saat menyusun kerangka di Bab 04.</p>
+        </div>
+
+        <h3 style="margin-top:2rem;">Cara memakai bahan ajar ini</h3>
+        <ol class="howto">
+          <li><div><strong>Baca Materi:</strong> pahami unsur pembangun cerpen dan tahapan menulisnya.</div></li>
+          <li><div><strong>Bedah Contoh Cerpen:</strong> klik kalimat bergaris pada naskah model untuk melihat catatan editor.</div></li>
+          <li><div><strong>Tulis di Latihan Menulis:</strong> ikuti empat langkah terbimbing sampai draf ceritamu selesai, lalu minta umpan balik AI.</div></li>
+          <li><div><strong>Pantau Progres:</strong> lihat sejauh mana kemajuanmu dan kembali revisi kapan saja.</div></li>
+        </ol>
+      </section>
+
+      <!-- ============ MATERI ============ -->
+      <section id="materi" class="panel">
+        <span class="eyebrow">Bengkel Cerpen · Bab 02</span>
+        <h2>Materi: membedah cerita pendek</h2>
+        <p class="lede">Sebelum menulis, kenali dulu bahan-bahan pembentuknya. Buka tiap catatan berikut satu per satu.</p>
+
+        <details class="acc" open>
+          <summary>Apa itu cerita pendek?</summary>
+          <div class="acc-body">
+            <p>Cerita pendek (cerpen) adalah karya fiksi naratif yang habis dibaca dalam sekali duduk, umumnya kurang dari 10.000 kata. Karena ruangnya terbatas, cerpen umumnya hanya memusatkan diri pada satu konflik utama dan sedikit tokoh, tetapi tetap harus meninggalkan kesan yang utuh bagi pembacanya.</p>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary>Memahami &amp; menafsirkan konteks cerpen</summary>
+          <div class="acc-body">
+            <span class="tag">tujuan pembelajaran 1</span>
+            <p>Sebelum menulis, seorang penulis perlu membaca dan menafsirkan cerpen lain sebagai fondasi atau inspirasi. Saat membaca, cermati unsur intrinsik dan strukturnya, lalu tanyakan: isu nyata apa (sosial, budaya, atau sejarah) yang sedang direfleksikan cerita ini? Perpisahan karena orang tua pindah kerja, kesenjangan sosial di lingkungan sekolah, atau nilai kekeluargaan yang mulai bergeser adalah contoh isu nyata yang bisa menjadi titik tolak sebuah cerpen.</p>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary>Tema</summary>
+          <div class="acc-body">
+            <span class="tag">unsur intrinsik</span>
+            <p>Tema adalah gagasan pokok yang menjadi dasar cerita, misalnya persahabatan, keberanian, kehilangan, atau pengorbanan. Tema yang kuat biasanya tidak dinyatakan langsung, melainkan dirasakan pembaca melalui peristiwa dan pilihan tokoh sepanjang cerita.</p>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary>Alur (plot)</summary>
+          <div class="acc-body">
+            <span class="tag">unsur intrinsik</span><span class="tag">tujuan pembelajaran 2</span>
+            <p>Alur adalah rangkaian peristiwa yang disusun berdasarkan hubungan sebab-akibat. Merancang alur yang selaras dengan pesan cerita adalah bagian dari merancang kerangka kreatif. Pola alur maju yang umum digunakan siswa terdiri atas lima tahap:</p>
+            <p><strong>Pengenalan</strong> → memperkenalkan tokoh dan latar. <strong>Pemunculan konflik</strong> → muncul masalah awal. <strong>Peningkatan konflik</strong> → masalah membesar dan menegang. <strong>Klimaks</strong> → titik puncak ketegangan. <strong>Penyelesaian</strong> → konflik mereda dan cerita ditutup.</p>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary>Tokoh dan penokohan</summary>
+          <div class="acc-body">
+            <span class="tag">unsur intrinsik</span><span class="tag">tujuan pembelajaran 2</span>
+            <p>Tokoh adalah pelaku dalam cerita; penokohan adalah cara pengarang menggambarkan watak tokoh. Penggambaran <strong>langsung</strong> dilakukan lewat narasi ("Abian memang pendiam"), sedangkan penggambaran <strong>tidak langsung</strong> dilakukan lewat dialog, tindakan, atau reaksi tokoh lain terhadapnya, cara yang biasanya terasa lebih hidup bagi pembaca. Penokohan yang kuat adalah salah satu unsur utama dalam merancang kerangka kreatif sebuah cerpen.</p>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary>Latar</summary>
+          <div class="acc-body">
+            <span class="tag">unsur intrinsik</span>
+            <p>Latar mencakup tiga hal: tempat (di mana peristiwa terjadi), waktu (kapan peristiwa berlangsung), dan suasana (nuansa emosional yang dirasakan pembaca). Latar yang detail dan spesifik membuat dunia cerita terasa nyata.</p>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary>Sudut pandang</summary>
+          <div class="acc-body">
+            <span class="tag">unsur intrinsik</span>
+            <p>Sudut pandang adalah posisi pengarang dalam bercerita. <strong>Orang pertama</strong> ("aku") membuat pembaca dekat dengan batin satu tokoh. <strong>Orang ketiga serba tahu</strong> mengetahui isi pikiran semua tokoh, sementara <strong>orang ketiga terbatas</strong> hanya mengikuti satu tokoh saja. Pilihan ini paling sering dipakai dalam cerpen modern.</p>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary>Gaya bahasa dan diksi</summary>
+          <div class="acc-body">
+            <span class="tag">unsur intrinsik</span><span class="tag">tujuan pembelajaran 2</span>
+            <p>Diksi adalah pemilihan kata; gaya bahasa mencakup majas seperti metafora, personifikasi, atau hiperbola yang membuat kalimat lebih hidup. Hindari kata yang klise ("hatinya bagai disambar petir") dan carilah cara baru untuk menggambarkan perasaan tokohmu. Pilihan gaya bahasa dan majas ini bagian penting dari merancang kerangka kreatif.</p>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary>Dialog yang hidup dan detail indrawi</summary>
+          <div class="acc-body">
+            <span class="tag">tujuan pembelajaran 3</span>
+            <p>Saat memproduksi karya, dialog yang hidup dibangun dari cara tokoh benar-benar bicara: kalimat pendek, jeda, atau kata yang setengah terucap, bukan kalimat formal yang kaku. Detail indrawi yang tajam melibatkan pancaindra pembaca: bukan sekadar "hujan turun", melainkan bagaimana suara rintiknya, dinginnya udara, atau bau tanah basah yang tercium. Detail semacam ini membuat pembaca ikut merasakan, bukan hanya mengetahui, apa yang dialami tokoh.</p>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary>Amanat</summary>
+          <div class="acc-body">
+            <span class="tag">unsur intrinsik</span>
+            <p>Amanat adalah pesan moral yang ingin disampaikan pengarang. Amanat yang baik hadir secara implisit, tersirat dari peristiwa dan akibat pilihan tokoh, bukan dituliskan sebagai nasihat langsung di akhir cerita.</p>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary>Tahapan menulis cerpen</summary>
+          <div class="acc-body">
+            <span class="tag">proses menulis</span>
+            <p><strong>Pramenulis:</strong> mengumpulkan ide lewat curah gagasan bebas. <strong>Menulis draf:</strong> menuangkan kerangka menjadi cerita utuh tanpa terlalu memikirkan kesempurnaan. <strong>Merevisi:</strong> memeriksa kembali logika alur, kekuatan tokoh, dan kejelasan tema. <strong>Menyunting:</strong> memperbaiki ejaan, tanda baca, dan pilihan kata. <strong>Publikasi:</strong> membagikan cerita kepada pembaca.</p>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary>Refleksi dan publikasi karya</summary>
+          <div class="acc-body">
+            <span class="tag">tujuan pembelajaran 4</span>
+            <p>Setelah draf selesai, tinjau ulang tulisanmu: apakah alurnya sudah logis, apakah tokohnya terasa hidup, apakah amanatnya tersampaikan tanpa terasa menggurui? Revisi berdasarkan umpan balik, baik dari pembimbing AI, guru, maupun teman. Setelah revisi, karyamu siap diterbitkan, baik ke antologi kelas, majalah dinding (mading) sekolah, maupun platform digital seperti blog atau media sosial. Publikasi bukan sekadar tujuan akhir, tetapi juga ajang berbagi refleksi kepada pembaca lain.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ============ CONTOH CERPEN ============ -->
+      <section id="contoh" class="panel">
+        <span class="eyebrow">Bengkel Cerpen · Bab 03</span>
+        <h2>Membedah contoh cerpen</h2>
+        <p class="lede">Berikut cerpen model karya tim penyusun bahan ajar ini. Klik kalimat yang bergaris merah untuk membuka catatan editor tentang unsur intrinsik yang bekerja di dalamnya.</p>
+
+        <article class="manuscript">
+          <h3>Umbrella</h3>
+          <p class="byline">cerpen model · disusun untuk bahan ajar ini</p>
+
+          <p><span class="mark" data-note="n1">Hujan pertama bulan itu turun ketika Rara sedang menyusun ulang rak bukunya, di kamar kos sempit yang jendelanya menghadap langsung ke gerbang SMA Negeri 1 Bangsa yang mulai tertutup kabut tipis.</span> Ia berhenti sejenak, memandangi tumpukan buku catatan yang sudah lecek di sudut-sudutnya, lalu duduk di lantai dengan lutut ditekuk, membiarkan suara rintik hujan mengisi ruangan yang tiba-tiba terasa terlalu sunyi.</p>
+
+          <p><span class="mark" data-note="n2">Besok, Abian akan pindah ke Balikpapan, mengikuti ayahnya yang dipindahtugaskan.</span> Rara sudah tahu kabar itu sejak dua minggu lalu, tapi baru sekarang rasanya benar-benar nyata. Seperti kabar yang tadinya hanya tinta di atas kertas, kini berubah jadi batu yang mengganjal dada. Ia masih ingat persis bagaimana Abian menyampaikannya waktu itu, di kantin sekolah, sambil mengaduk es teh yang sudah tidak dingin lagi. Suaranya datar, hampir seperti membicarakan tugas sekolah, tapi tangannya yang terus mengaduk tanpa henti mengkhianati ketenangan itu.</p>
+
+          <p>Abian bukan tipe orang yang banyak bicara. <span class="mark" data-note="n3">Di kelas, ia lebih sering duduk di pojok belakang, kepalanya menunduk ke buku gambar, dan hanya akan menoleh kalau namanya dipanggil dua kali.</span> Guru-guru sering mengira ia tidak memperhatikan pelajaran, padahal di balik buku gambar itu, tangannya diam-diam merekam segala hal yang menurutnya berharga untuk disimpan, entah itu wajah teman sekelas yang tertawa, sudut taman sekolah saat sore, atau sekadar bentuk awan yang lewat di luar jendela.</p>
+
+          <p>Tapi setiap kali Rara kesulitan mencari kata untuk cerita pendeknya, Abianlah orang pertama yang dimintai pendapat, dan Abian selalu punya satu atau dua kalimat yang membuat cerita itu, entah bagaimana terasa lebih jujur. Rara ingat bagaimana suatu kali ia menunjukkan draf ceritanya tentang seorang anak yang kehilangan kucingnya, dan Abian hanya berkata, "Kamu nggak perlu bilang dia sedih. Biar pembaca yang sadar sendiri, dari cara dia berhenti menyisakan makanan di piring kucingnya." Kalimat sesederhana itu mengubah seluruh cerita Rara, dan sejak saat itu Rara selalu menyimpan komentar-komentar Abian di buku catatan kecil, seolah takut kehilangan jejaknya.</p>
+
+          <p><span class="mark" data-note="n4">Sore itu Rara memutuskan pergi ke taman, tempat mereka biasa berbagi cerita, meski hujan belum juga reda dan payungnya cuma satu.</span> Jalan menuju taman becek, genangan air memantulkan cahaya lampu jalan yang mulai menyala satu per satu. Rara menyusuri jalan itu dengan langkah cepat, sesekali melompati genangan, sambil memeluk map berisi surat yang sudah ia tulis hapus tulis lagi sejak semalam.</p>
+
+          <p>Ia menunggu di bangku kayu yang catnya mulai mengelupas, sambil membaca ulang surat pendek itu untuk kesekian kalinya. Kalimat pertama sudah diganti tiga kali, dan tetap saja terasa kurang tepat. Bagaimana caranya merangkum dua tahun persahabatan dalam beberapa kalimat, tanpa terdengar berlebihan atau justru terlalu dingin? Ia melipat kertas itu, membukanya lagi, lalu melipatnya sekali lagi, gelisah menunggu seseorang yang belum tentu datang di tengah hujan seperti ini.</p>
+
+          <p>Abian datang setengah basah, rambutnya menempel di dahi, membawa map plastik berisi gambar-gambar yang belum pernah ditunjukkannya ke siapa pun. Ia duduk di sebelah Rara tanpa banyak kata, mengatur napas sejenak seperti baru saja berlari.</p>
+
+          <p><span class="mark" data-note="n5">"Aku nggak pandai bilang perpisahan," katanya pelan, menyerahkan map itu, "jadi aku gambar saja."</span></p>
+
+          <p>Rara membuka map itu perlahan, hati-hati, seolah takut merusak sesuatu yang rapuh. Di lembar paling atas, ada sketsa mereka berdua duduk di bangku itu, dengan hujan yang digambar seperti benang-benang perak jatuh dari langit. Di lembar berikutnya, ada gambar kelas mereka dari sudut pandang bangku Abian di belakang, sudut yang selama ini hanya diketahui olehnya sendiri. Ada juga sketsa perpustakaan sekolah, meja kantin favorit mereka, bahkan gerbang sekolah yang terlihat dari jendela kamar kos Rara, lengkap dengan tulisan kecil di sudut kertas: "Yang paling sering kau ceritakan."</p>
+
+          <p><span class="mark" data-note="n6">Rara tertawa kecil, matanya panas, tangannya sedikit gemetar membalik satu per satu halaman itu. Untuk pertama kalinya ia merasa bahwa jarak antara Balikpapan dan kota ini mungkin tidak akan seluas yang ia bayangkan, selama mereka masih mau saling mengirim kabar, sejauh apa pun laut yang memisahkan.</span></p>
+
+          <p>"Aku juga bawa sesuatu," katanya, mengeluarkan surat yang sudah lecek karena terlalu sering dilipat dan dibuka. "Tapi punyaku nggak sebagus gambarmu."</p>
+
+          <p>Abian menerimanya, membacanya perlahan-lahan sambil sesekali tersenyum kecil, meski hujan yang mulai mereda membuat suara di sekitar mereka jadi lebih sunyi, hanya menyisakan tetesan air dari dedaunan pohon di atas bangku itu.</p>
+
+          <p>Mereka duduk berdampingan sampai hujan benar-benar reda, berbicara tentang hal-hal kecil yang biasanya tidak sempat mereka bahas, buku apa yang sedang dibaca Abian, cerita apa yang sedang ditulis Rara, dan bagaimana rasanya nanti kalau salah satu dari mereka menemukan hal baru yang menarik tapi tidak bisa langsung diceritakan ke yang lain. Mereka berjanji akan saling menulis surat setiap bulan, surat sungguhan, bukan sekadar pesan singkat di ponsel, karena menurut Abian, "Surat itu seperti gambar. Butuh waktu, jadi lebih berarti."</p>
+
+          <p>Dan ketika akhirnya Abian berjalan pulang, langkahnya menjauh perlahan di antara genangan air yang mulai tenang, Rara masih duduk di bangku itu beberapa menit lebih lama, memeluk map berisi gambar-gambar tadi. <span class="mark" data-note="n7">Ia sadar bahwa perpisahan tidak selalu berarti kehilangan, selama ada keberanian untuk tetap menjaga apa yang sudah dijalin, lewat kertas, lewat tinta, dan lewat kesediaan untuk terus saling mengirim kabar, betapa pun jauhnya jarak yang harus ditempuh oleh setiap kata.</span></p>
+        </article>
+
+        <div class="note-panel" id="notePanel">
+          <span class="note-label">Catatan editor</span>
+          <p id="noteText">Klik salah satu kalimat bergaris pada naskah di atas untuk membaca catatannya di sini.</p>
+        </div>
+        <p class="hint-row">7 kalimat bertanda tersedia, cobalah semuanya.</p>
+      </section>
+
+      <!-- ============ LATIHAN MENULIS ============ -->
+      <section id="latihan" class="panel">
+        <span class="eyebrow">Bengkel Cerpen · Bab 04</span>
+        <h2>Latihan menulis terbimbing</h2>
+        <p class="lede">Ikuti empat langkah ini untuk menulis cerpenmu sendiri, lalu minta pembimbing AI membaca dan memberi catatan.</p>
+
+        <div class="steps-nav" id="stepsNav">
+          <span class="step-dot current" data-step="1">1 · Pramenulis</span>
+          <span class="step-dot" data-step="2">2 · Kerangka</span>
+          <span class="step-dot" data-step="3">3 · Menulis Draf</span>
+          <span class="step-dot" data-step="4">4 · Umpan Balik AI</span>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="step-panel active" data-step="1">
+          <div class="field">
+            <label for="tema">Pilih tema awal (boleh diubah nanti)</label>
+            <select id="tema">
+              <option value="">Pilih tema</option>
+              <option>Persahabatan</option>
+              <option>Keluarga</option>
+              <option>Keberanian</option>
+              <option>Kehilangan</option>
+              <option>Mimpi dan cita-cita</option>
+              <option>Tema bebas</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="freewrite">Curah gagasan bebas</label>
+            <textarea id="freewrite" rows="6" placeholder="Tuliskan ide-ide liar tentang cerita yang ingin kamu tulis. Tidak perlu rapi: siapa tokohnya, kejadian apa yang mengganggu pikiranmu akhir-akhir ini, atau tempat apa yang ingin kamu jadikan latar."></textarea>
+            <p class="help">Tidak ada jawaban salah di sini. Tulis saja apa pun yang muncul di kepalamu selama lima menit.</p>
+          </div>
+          <div class="btn-row">
+            <button class="btn" onclick="goStep(2)">Lanjut ke Kerangka →</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-panel" data-step="2">
+          <div class="grid2">
+            <div class="field">
+              <label for="tokoh">Tokoh utama</label>
+              <input type="text" id="tokoh" placeholder="Nama dan ciri singkat tokohmu">
+            </div>
+            <div class="field">
+              <label for="latarKerangka">Latar (tempat &amp; waktu)</label>
+              <input type="text" id="latarKerangka" placeholder="Di mana dan kapan cerita terjadi">
+            </div>
+          </div>
+          <div class="field">
+            <label for="konflik">Konflik utama</label>
+            <textarea id="konflik" rows="2" placeholder="Masalah apa yang dihadapi tokoh utama?"></textarea>
+          </div>
+          <div class="grid2">
+            <div class="field">
+              <label for="pengenalan">Pengenalan</label>
+              <textarea id="pengenalan" rows="2" placeholder="Bagaimana cerita dibuka?"></textarea>
+            </div>
+            <div class="field">
+              <label for="klimaks">Klimaks</label>
+              <textarea id="klimaks" rows="2" placeholder="Titik puncak ketegangan seperti apa?"></textarea>
+            </div>
+          </div>
+          <div class="field">
+            <label for="penyelesaian">Penyelesaian</label>
+            <textarea id="penyelesaian" rows="2" placeholder="Bagaimana konflik ini berakhir?"></textarea>
+          </div>
+          <div class="field">
+            <label for="amanat">Amanat yang ingin disampaikan</label>
+            <textarea id="amanat" rows="2" placeholder="Pesan apa yang ingin pembaca rasakan setelah membaca ceritamu?"></textarea>
+          </div>
+          <div class="btn-row">
+            <button class="btn ghost" onclick="goStep(1)">← Kembali</button>
+            <button class="btn" onclick="saveKerangka(); goStep(3)">Simpan &amp; Lanjut Menulis →</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-panel" data-step="3">
+          <div class="field">
+            <label for="draf">Draf cerpenmu</label>
+            <textarea id="draf" rows="16" placeholder="Mulai tulis cerpenmu di sini berdasarkan kerangka yang sudah kamu susun. Jangan berhenti untuk mengedit dulu, selesaikan draf pertamamu sampai akhir." oninput="updateWordCount()"></textarea>
+            <p class="wc" id="wordCount">0 kata</p>
+          </div>
+          <div class="btn-row">
+            <button class="btn ghost" onclick="goStep(2)">← Kembali ke Kerangka</button>
+            <button class="btn" onclick="saveDraft(); goStep(4)">Simpan &amp; Minta Umpan Balik AI →</button>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-panel" data-step="4">
+          <div class="btn-row" style="margin-top:0;">
+            <button class="btn gold" id="btnFeedback" onclick="requestAIFeedback()">Minta Umpan Balik AI</button>
+            <button class="btn ghost" onclick="goStep(3)">← Kembali &amp; Revisi Draf</button>
+          </div>
+          <div class="ai-box" id="aiBox">
+            <p class="help">Pembimbing AI akan membaca kerangka dan draf yang sudah kamu simpan, lalu memberi catatan seperti guru menandai naskah dengan pena merah: kekuatan tulisanmu, catatan per unsur intrinsik, dan saran perbaikan.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PROGRES ============ -->
+      <section id="progres" class="panel">
+        <span class="eyebrow">Bengkel Cerpen · Bab 05</span>
+        <h2>Progres belajarmu</h2>
+        <p class="lede">Pantau tahap mana yang sudah kamu selesaikan. Data disimpan otomatis di perangkat ini.</p>
+
+        <ul class="progress-list" id="progressList">
+          <li>
+            <div class="check" id="chkKerangka">–</div>
+            <div class="ptxt"><strong>Kerangka cerita</strong><span id="txtKerangka">belum disimpan</span></div>
+          </li>
+          <li>
+            <div class="check" id="chkDraf">–</div>
+            <div class="ptxt"><strong>Draf cerpen</strong><span id="txtDraf">belum disimpan</span></div>
+          </li>
+          <li>
+            <div class="check" id="chkFeedback">–</div>
+            <div class="ptxt"><strong>Umpan balik AI</strong><span id="txtFeedback">belum diminta</span></div>
+          </li>
+        </ul>
+
+        <div class="btn-row">
+          <button class="btn ghost" onclick="goTab('latihan')">Lanjutkan menulis</button>
+          <button class="btn ghost" onclick="resetProgress()">Mulai ulang latihan</button>
+        </div>
+      </section>
+
+      <!-- ============ GLOSARIUM & DAFTAR PUSTAKA ============ -->
+      <section id="glosarium" class="panel">
+        <span class="eyebrow">Bengkel Cerpen · Bab 06</span>
+        <h2>Glosarium &amp; daftar pustaka</h2>
+        <p class="lede">Kumpulan istilah penting dan sumber rujukan yang digunakan dalam menyusun bahan ajar ini.</p>
+
+        <h3 style="margin-top:2rem;">Glosarium</h3>
+        <dl class="glossary">
+          <dt>Amanat</dt>
+          <dd>Pesan moral yang ingin disampaikan pengarang melalui cerita, biasanya disampaikan secara tersirat.</dd>
+
+          <dt>Alur (plot)</dt>
+          <dd>Rangkaian peristiwa dalam cerita yang disusun berdasarkan hubungan sebab-akibat.</dd>
+
+          <dt>Diksi</dt>
+          <dd>Pemilihan kata yang digunakan pengarang untuk mencapai efek tertentu dalam tulisan.</dd>
+
+          <dt>Detail indrawi</dt>
+          <dd>Perincian yang melibatkan pancaindra (penglihatan, pendengaran, penciuman, perabaan, pengecapan) untuk menghidupkan suasana cerita.</dd>
+
+          <dt>Gaya bahasa (majas)</dt>
+          <dd>Cara khas pengarang menggunakan bahasa, termasuk penggunaan metafora, personifikasi, hiperbola, dan sejenisnya.</dd>
+
+          <dt>Klimaks</dt>
+          <dd>Titik puncak ketegangan dalam alur cerita, tepat sebelum konflik mulai menemukan penyelesaiannya.</dd>
+
+          <dt>Konflik</dt>
+          <dd>Permasalahan atau pertentangan yang dihadapi tokoh, menjadi penggerak utama jalannya cerita.</dd>
+
+          <dt>Latar</dt>
+          <dd>Keterangan tempat, waktu, dan suasana terjadinya peristiwa dalam cerita.</dd>
+
+          <dt>Penokohan</dt>
+          <dd>Cara pengarang menggambarkan watak atau karakter tokoh, baik secara langsung maupun tidak langsung.</dd>
+
+          <dt>Sudut pandang</dt>
+          <dd>Posisi pengarang dalam menyampaikan cerita, misalnya sebagai orang pertama atau orang ketiga.</dd>
+
+          <dt>Tema</dt>
+          <dd>Gagasan pokok atau ide dasar yang menjadi landasan sebuah cerita.</dd>
+
+          <dt>Tokoh</dt>
+          <dd>Pelaku yang menjalankan peristiwa dalam sebuah cerita.</dd>
+        </dl>
+
+        <h3 style="margin-top:2.4rem;">Daftar pustaka</h3>
+        <ul class="biblio">
+          <li>Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi. (2022). <em>Capaian Pembelajaran Mata Pelajaran Bahasa Indonesia untuk Fase E dan Fase F.</em> Jakarta: Kemendikbudristek.</li>
+          <li>Nurgiyantoro, B. (2018). <em>Teori Pengkajian Fiksi.</em> Yogyakarta: Gadjah Mada University Press.</li>
+          <li>Sayuti, S. A. (2000). <em>Berkenalan dengan Prosa Fiksi.</em> Yogyakarta: Gama Media.</li>
+          <li>Stanton, R. (2007). <em>Teori Fiksi</em> (terj. Sugihastuti &amp; Rossi Abi Al Irsyad). Yogyakarta: Pustaka Pelajar.</li>
+          <li>Wellek, R. &amp; Warren, A. (1956). <em>Theory of Literature.</em> New York: Harcourt, Brace and Company.</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="foot">Bahan Ajar Cerita Pendek Kelas XI SMA</footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------------- Konfigurasi backend AI ----------------
+   Ini adalah path relatif ke Netlify Function (netlify/functions/feedback.js).
+   Karena satu domain dengan situs ini, tidak perlu diubah setelah deploy —
+   otomatis mengarah ke https://situs-anda.netlify.app/.netlify/functions/feedback */
+const BACKEND_URL = "/.netlify/functions/feedback";
+
+/* ---------------- Tab & step navigation ---------------- */
+function goTab(name){
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === name));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => goTab(t.dataset.tab)));
+
+function goStep(n){
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.toggle('active', Number(p.dataset.step) === n));
+  document.querySelectorAll('.step-dot').forEach(d => {
+    const s = Number(d.dataset.step);
+    d.classList.toggle('current', s === n);
+    d.classList.toggle('done', s < n);
+  });
+}
+document.querySelectorAll('.step-dot').forEach(d => d.addEventListener('click', () => goStep(Number(d.dataset.step))));
+
+/* ---------------- Toast ---------------- */
+let toastTimer;
+function showToast(msg){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+}
+
+/* ---------------- Contoh cerpen annotation ---------------- */
+const notes = {
+  n1: { label: 'Latar', text: 'Waktu (hujan pertama bulan itu) dan tempat (kamar kos, jendela menghadap gerbang sekolah) diperkenalkan sekaligus di kalimat pembuka, membangun suasana sendu sejak awal.' },
+  n2: { label: 'Alur, Pemunculan Konflik', text: 'Informasi kepindahan Abian adalah pemicu konflik utama cerita: ancaman perpisahan yang harus dihadapi tokoh utama.' },
+  n3: { label: 'Penokohan tidak langsung', text: 'Watak pendiam Abian tidak dinyatakan langsung ("Abian pendiam"), melainkan digambarkan lewat perilakunya di kelas, yaitu penokohan tidak langsung.' },
+  n4: { label: 'Alur, Peningkatan Konflik', text: 'Keputusan Rara pergi ke taman di tengah hujan menaikkan ketegangan emosional menuju klimaks pertemuan mereka.' },
+  n5: { label: 'Sudut pandang & dialog', text: 'Cerita ditulis dari sudut pandang orang ketiga terbatas, pembaca hanya mengikuti apa yang dirasakan dan diketahui Rara, termasuk saat mendengar ucapan Abian ini.' },
+  n6: { label: 'Klimaks & Tema', text: 'Inilah titik puncak cerita: kesadaran Rara tentang persahabatan mengalahkan jarak adalah inti tema yang dibangun sejak awal.' },
+  n7: { label: 'Amanat', text: 'Pesan moral cerita disampaikan secara tersirat lewat kesadaran tokoh, bukan lewat nasihat langsung, inilah cara amanat yang baik dihadirkan.' },
+};
+document.querySelectorAll('.mark').forEach(span => {
+  span.addEventListener('click', () => {
+    document.querySelectorAll('.mark').forEach(s => s.classList.remove('on'));
+    span.classList.add('on');
+    const n = notes[span.dataset.note];
+    document.getElementById('noteText').innerHTML = '<strong style="font-style:normal;color:var(--ink);">' + n.label + '.</strong> ' + n.text;
+  });
+});
+
+/* ---------------- Storage helpers ---------------- */
+async function storeSet(key, value){
+  try{ await window.storage.set(key, JSON.stringify(value), false); return true; }
+  catch(e){ console.error('Gagal menyimpan', key, e); return false; }
+}
+async function storeGet(key){
+  try{
+    const r = await window.storage.get(key, false);
+    return r ? JSON.parse(r.value) : null;
+  }catch(e){ return null; }
+}
+async function storeDelete(key){
+  try{ await window.storage.delete(key, false); }catch(e){}
+}
+
+/* ---------------- Word count ---------------- */
+function updateWordCount(){
+  const text = document.getElementById('draf').value.trim();
+  const count = text ? text.split(/\s+/).filter(Boolean).length : 0;
+  document.getElementById('wordCount').textContent = count + ' kata';
+}
+
+/* ---------------- Save actions ---------------- */
+async function saveKerangka(){
+  const kerangka = {
+    tema: document.getElementById('tema').value,
+    freewrite: document.getElementById('freewrite').value,
+    tokoh: document.getElementById('tokoh').value,
+    latar: document.getElementById('latarKerangka').value,
+    konflik: document.getElementById('konflik').value,
+    pengenalan: document.getElementById('pengenalan').value,
+    klimaks: document.getElementById('klimaks').value,
+    penyelesaian: document.getElementById('penyelesaian').value,
+    amanat: document.getElementById('amanat').value,
+  };
+  const ok = await storeSet('bengkel:kerangka', kerangka);
+  if(ok) showToast('Kerangka tersimpan');
+  await refreshProgress();
+}
+
+async function saveDraft(){
+  const draf = document.getElementById('draf').value;
+  const ok = await storeSet('bengkel:draf', { text: draf, savedAt: Date.now() });
+  if(ok) showToast('Draf tersimpan');
+  await refreshProgress();
+}
+
+/* ---------------- AI Feedback ---------------- */
+async function requestAIFeedback(){
+  const btn = document.getElementById('btnFeedback');
+  const box = document.getElementById('aiBox');
+  const kerangka = await storeGet('bengkel:kerangka');
+  const draf = await storeGet('bengkel:draf');
+
+  if(!draf || !draf.text || draf.text.trim().split(/\s+/).filter(Boolean).length < 30){
+    box.innerHTML = '<div class="error-box">Draf cerpenmu masih terlalu pendek untuk dinilai. Kembali ke Langkah 3 dan lanjutkan menulis dulu, ya: usahakan minimal beberapa paragraf.</div>';
+    return;
+  }
+
+  btn.disabled = true;
+  box.innerHTML = '<div class="ai-loading"><span class="spinner"></span> Pembimbing AI sedang membaca draf kamu...</div>';
+
+  const kerangkaText = kerangka ? `
+Tema: ${kerangka.tema || '-'}
+Tokoh utama: ${kerangka.tokoh || '-'}
+Latar: ${kerangka.latar || '-'}
+Konflik: ${kerangka.konflik || '-'}
+Pengenalan: ${kerangka.pengenalan || '-'}
+Klimaks: ${kerangka.klimaks || '-'}
+Penyelesaian: ${kerangka.penyelesaian || '-'}
+Amanat: ${kerangka.amanat || '-'}` : 'Tidak ada kerangka tersimpan.';
+
+  const prompt = `Kamu adalah guru Bahasa Indonesia yang berpengalaman membimbing siswa kelas XI SMA menulis cerita pendek. Bacalah kerangka dan draf cerpen siswa berikut, lalu berikan umpan balik yang membangun, spesifik, dan mudah dipahami siswa remaja. Gunakan bahasa Indonesia yang hangat tapi jujur.
+
+KERANGKA SISWA:
+${kerangkaText}
+
+DRAF CERPEN SISWA:
+"""
+${draf.text}
+"""
+
+Balas HANYA dengan JSON valid tanpa teks lain, tanpa markdown fence, dengan struktur persis seperti ini:
+{
+  "ringkasan": "satu-dua kalimat kesan umum tentang cerita ini",
+  "kekuatan": ["poin kekuatan 1", "poin kekuatan 2", "poin kekuatan 3"],
+  "catatan": [
+    {"aspek": "Tema", "catatan": "...", "saran": "..."},
+    {"aspek": "Alur", "catatan": "...", "saran": "..."},
+    {"aspek": "Tokoh & Penokohan", "catatan": "...", "saran": "..."},
+    {"aspek": "Latar", "catatan": "...", "saran": "..."},
+    {"aspek": "Diksi & Gaya Bahasa", "catatan": "...", "saran": "..."},
+    {"aspek": "Kaidah Kebahasaan", "catatan": "...", "saran": "..."}
+  ],
+  "nilai": {"tema": 1-4, "alur": 1-4, "tokoh": 1-4, "latar": 1-4, "bahasa": 1-4, "amanat": 1-4}
+}
+Nilai 1=perlu banyak perbaikan, 2=cukup, 3=baik, 4=sangat baik.`;
+
+  try{
+    const response = await fetch(BACKEND_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt })
+    });
+    if(!response.ok){
+      throw new Error('Backend merespons dengan status ' + response.status);
+    }
+    const data = await response.json();
+    const textBlock = (data.content || []).find(b => b.type === 'text');
+    if(!textBlock) throw new Error('Tidak ada respons teks dari AI');
+    const cleaned = textBlock.text.replace(/```json|```/g, '').trim();
+    const feedback = JSON.parse(cleaned);
+
+    renderFeedback(feedback);
+    await storeSet('bengkel:feedback', { feedback, savedAt: Date.now() });
+    await refreshProgress();
+    showToast('Umpan balik AI diterima');
+  }catch(err){
+    console.error(err);
+    box.innerHTML = '<div class="error-box">Pembimbing AI tidak dapat membaca draf kamu saat ini. Periksa koneksi lalu coba lagi sebentar.</div>';
+  }finally{
+    btn.disabled = false;
+  }
+}
+
+function renderFeedback(fb){
+  const box = document.getElementById('aiBox');
+  const aspekLabels = { tema:'Tema', alur:'Alur', tokoh:'Tokoh', latar:'Latar', bahasa:'Bahasa', amanat:'Amanat' };
+  let scoreHtml = '<div class="score-grid">';
+  for(const key in aspekLabels){
+    const val = (fb.nilai && fb.nilai[key]) ? Number(fb.nilai[key]) : 0;
+    let dots = '';
+    for(let i=1;i<=4;i++){ dots += `<span class="dot${i<=val?' fill':''}"></span>`; }
+    scoreHtml += `<div class="score-card"><div class="label">${aspekLabels[key]}</div><div class="dots">${dots}</div></div>`;
+  }
+  scoreHtml += '</div>';
+
+  const strengthsHtml = fb.kekuatan && fb.kekuatan.length ? `
+    <div class="strengths">
+      <div class="aspek">Kekuatan tulisanmu</div>
+      <ul>${fb.kekuatan.map(k => `<li>${escapeHtml(k)}</li>`).join('')}</ul>
+    </div>` : '';
+
+  const catatan = fb.catatan || [];
+  const chipsHtml = catatan.length ? `
+    <div class="aspek-chips" id="feedbackChips">
+      ${catatan.map((c, i) => `<button type="button" class="aspek-chip" data-idx="${i}">${escapeHtml(c.aspek || 'Catatan')}</button>`).join('')}
+    </div>
+    <div class="note-panel feedback-note-panel" id="feedbackNotePanel">
+      <span class="note-label">Catatan editor</span>
+      <p id="feedbackNoteText" class="empty-hint">Klik salah satu aspek di atas untuk membaca catatan revisinya di sini.</p>
+    </div>` : '';
+
+  box.innerHTML = `
+    <div class="feedback-summary">${escapeHtml(fb.ringkasan || '')}</div>
+    ${scoreHtml}
+    ${strengthsHtml}
+    ${chipsHtml}
+  `;
+
+  if(catatan.length){
+    box.querySelectorAll('.aspek-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        box.querySelectorAll('.aspek-chip').forEach(c => c.classList.remove('on'));
+        chip.classList.add('on');
+        const c = catatan[Number(chip.dataset.idx)];
+        const noteText = document.getElementById('feedbackNoteText');
+        noteText.classList.remove('empty-hint');
+        noteText.innerHTML = `<strong style="font-style:normal;color:var(--ink);">${escapeHtml(c.aspek || '')}.</strong> ${escapeHtml(c.catatan || '')}` +
+          (c.saran ? `<span class="saran">${escapeHtml(c.saran)}</span>` : '');
+      });
+    });
+  }
+}
+
+function escapeHtml(str){
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+/* ---------------- Progress ---------------- */
+async function refreshProgress(){
+  const kerangka = await storeGet('bengkel:kerangka');
+  const draf = await storeGet('bengkel:draf');
+  const fbData = await storeGet('bengkel:feedback');
+
+  setCheck('chkKerangka', 'txtKerangka', !!(kerangka && kerangka.konflik),
+    kerangka && kerangka.konflik ? `tema: ${kerangka.tema || 'bebas'}` : 'belum disimpan');
+
+  const wc = draf && draf.text ? draf.text.trim().split(/\s+/).filter(Boolean).length : 0;
+  setCheck('chkDraf', 'txtDraf', wc >= 30, wc > 0 ? `${wc} kata` : 'belum disimpan');
+
+  setCheck('chkFeedback', 'txtFeedback', !!fbData,
+    fbData ? 'sudah diterima, buka Bab 04 untuk melihat kembali' : 'belum diminta');
+}
+
+function setCheck(checkId, textId, done, label){
+  const chk = document.getElementById(checkId);
+  const txt = document.getElementById(textId);
+  chk.classList.toggle('on', done);
+  chk.textContent = done ? '✓' : '–';
+  txt.textContent = label;
+}
+
+async function resetProgress(){
+  await storeDelete('bengkel:kerangka');
+  await storeDelete('bengkel:draf');
+  await storeDelete('bengkel:feedback');
+  ['tema','freewrite','tokoh','latarKerangka','konflik','pengenalan','klimaks','penyelesaian','amanat','draf'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+  updateWordCount();
+  document.getElementById('aiBox').innerHTML = '<p class="help">Pembimbing AI akan membaca kerangka dan draf yang sudah kamu simpan, lalu memberi catatan seperti guru menandai naskah dengan pena merah.</p>';
+  goStep(1);
+  await refreshProgress();
+  showToast('Latihan direset');
+}
+
+/* ---------------- Init ---------------- */
+async function init(){
+  const kerangka = await storeGet('bengkel:kerangka');
+  if(kerangka){
+    document.getElementById('tema').value = kerangka.tema || '';
+    document.getElementById('freewrite').value = kerangka.freewrite || '';
+    document.getElementById('tokoh').value = kerangka.tokoh || '';
+    document.getElementById('latarKerangka').value = kerangka.latar || '';
+    document.getElementById('konflik').value = kerangka.konflik || '';
+    document.getElementById('pengenalan').value = kerangka.pengenalan || '';
+    document.getElementById('klimaks').value = kerangka.klimaks || '';
+    document.getElementById('penyelesaian').value = kerangka.penyelesaian || '';
+    document.getElementById('amanat').value = kerangka.amanat || '';
+  }
+  const draf = await storeGet('bengkel:draf');
+  if(draf && draf.text){
+    document.getElementById('draf').value = draf.text;
+    updateWordCount();
+  }
+  const fbData = await storeGet('bengkel:feedback');
+  if(fbData && fbData.feedback){
+    renderFeedback(fbData.feedback);
+  }
+  await refreshProgress();
+}
+init();
+</script>
+</body>
+</html>
