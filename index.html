@@ -838,19 +838,23 @@ document.querySelectorAll('.mark').forEach(span => {
   });
 });
 
-/* ---------------- Storage helpers ---------------- */
+/* ---------------- Storage helpers ----------------
+   Menggunakan localStorage bawaan browser (bukan window.storage,
+   yang hanya tersedia di lingkungan preview Claude.ai, bukan di
+   website sungguhan seperti Netlify). Data tersimpan per-perangkat/
+   per-browser milik siswa masing-masing. */
 async function storeSet(key, value){
-  try{ await window.storage.set(key, JSON.stringify(value), false); return true; }
+  try{ localStorage.setItem(key, JSON.stringify(value)); return true; }
   catch(e){ console.error('Gagal menyimpan', key, e); return false; }
 }
 async function storeGet(key){
   try{
-    const r = await window.storage.get(key, false);
-    return r ? JSON.parse(r.value) : null;
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : null;
   }catch(e){ return null; }
 }
 async function storeDelete(key){
-  try{ await window.storage.delete(key, false); }catch(e){}
+  try{ localStorage.removeItem(key); }catch(e){}
 }
 
 /* ---------------- Word count ---------------- */
