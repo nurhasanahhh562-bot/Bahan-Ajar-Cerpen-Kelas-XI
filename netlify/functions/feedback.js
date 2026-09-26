@@ -6,7 +6,7 @@
 // pun yang membuka website Anda.
 //
 // Setelah dideploy, function ini otomatis bisa diakses di:
-//   https://NAMA-SITUS-ANDA.netlify.app/.netlify/functions/feedback
+// https://NAMA-SITUS-ANDA.netlify.app/.netlify/functions/feedback
 
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 
@@ -30,17 +30,33 @@ function isRateLimited(ip) {
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: JSON.stringify({ error: "Method not allowed" }) };
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ error: "Method not allowed" }),
+    };
   }
 
   if (!ANTHROPIC_API_KEY) {
-    console.error("ANTHROPIC_API_KEY belum diatur di Netlify Environment Variables.");
-    return { statusCode: 500, body: JSON.stringify({ error: "Server belum dikonfigurasi." }) };
+    console.error(
+      "ANTHROPIC_API_KEY belum diatur di Netlify Environment Variables."
+    );
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Server belum dikonfigurasi." }),
+    };
   }
 
-  const ip = event.headers["x-nf-client-connection-ip"] || event.headers["client-ip"] || "unknown";
+  const ip =
+    event.headers["x-nf-client-connection-ip"] ||
+    event.headers["client-ip"] ||
+    "unknown";
   if (isRateLimited(ip)) {
-    return { statusCode: 429, body: JSON.stringify({ error: "Terlalu banyak permintaan, coba lagi sebentar." }) };
+    return {
+      statusCode: 429,
+      body: JSON.stringify({
+        error: "Terlalu banyak permintaan, coba lagi sebentar.",
+      }),
+    };
   }
 
   let prompt;
@@ -48,14 +64,23 @@ exports.handler = async (event) => {
     const parsed = JSON.parse(event.body || "{}");
     prompt = parsed.prompt;
   } catch {
-    return { statusCode: 400, body: JSON.stringify({ error: "Body harus JSON valid." }) };
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: "Body harus JSON valid." }),
+    };
   }
 
   if (!prompt || typeof prompt !== "string") {
-    return { statusCode: 400, body: JSON.stringify({ error: "Field 'prompt' wajib diisi (string)." }) };
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: "Field 'prompt' wajib diisi (string)." }),
+    };
   }
   if (prompt.length > 20000) {
-    return { statusCode: 400, body: JSON.stringify({ error: "Prompt terlalu panjang." }) };
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: "Prompt terlalu panjang." }),
+    };
   }
 
   try {
@@ -67,7 +92,7 @@ exports.handler = async (event) => {
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-6",
+        model: "claude-sonnet-5",
         max_tokens: 1500,
         messages: [{ role: "user", content: prompt }],
       }),
@@ -76,7 +101,10 @@ exports.handler = async (event) => {
     if (!response.ok) {
       const errText = await response.text();
       console.error("Anthropic API error:", response.status, errText);
-      return { statusCode: 502, body: JSON.stringify({ error: "Gagal menghubungi layanan AI." }) };
+      return {
+        statusCode: 502,
+        body: JSON.stringify({ error: "Gagal menghubungi layanan AI." }),
+      };
     }
 
     const data = await response.json();
@@ -87,6 +115,9 @@ exports.handler = async (event) => {
     };
   } catch (err) {
     console.error("Function error:", err);
-    return { statusCode: 500, body: JSON.stringify({ error: "Terjadi kesalahan pada server." }) };
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Terjadi kesalahan pada server." }),
+    };
   }
 };
