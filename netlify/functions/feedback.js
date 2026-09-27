@@ -13,7 +13,7 @@
 // Untuk latihan menulis kelas skala kecil biasanya lebih dari cukup.
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const GEMINI_MODEL = "gemini-2.5-flash";
+const GEMINI_MODEL = "gemini-3.8-flash";
 
 // Rate limit sangat sederhana per cold-start (bukan pengganti proteksi
 // serius, tapi cukup untuk mencegah pemakaian berlebihan yang tidak sengaja).
