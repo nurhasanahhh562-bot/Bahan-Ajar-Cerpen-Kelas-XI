@@ -1,14 +1,19 @@
 // netlify/functions/feedback.js
 //
-// Ini adalah "Netlify Function" — kode ini berjalan di server Netlify,
-// bukan di browser pengunjung. API key Anda disimpan sebagai Environment
-// Variable di dashboard Netlify, sehingga tidak pernah terlihat oleh siapa
-// pun yang membuka website Anda.
+// VERSI GEMINI (Google AI) â€” dipakai sementara karena Gemini punya
+// tier gratis (tanpa kartu kredit) untuk model seperti gemini-2.5-flash.
+// Cara dapat API key gratis: buka https://aistudio.google.com/apikey
+// (login dengan akun Google, klik "Create API key" â€” tidak perlu isi
+// data kartu untuk tier gratis ini).
 //
-// Setelah dideploy, function ini otomatis bisa diakses di:
-// https://NAMA-SITUS-ANDA.netlify.app/.netlify/functions/feedback
+// Simpan key itu di Netlify sebagai environment variable bernama
+// GEMINI_API_KEY (Site configuration -> Environment variables).
+//
+// Catatan: tier gratis Gemini punya batas jumlah permintaan per menit/hari.
+// Untuk latihan menulis kelas skala kecil biasanya lebih dari cukup.
 
-const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const GEMINI_MODEL = "gemini-2.5-flash";
 
 // Rate limit sangat sederhana per cold-start (bukan pengganti proteksi
 // serius, tapi cukup untuk mencegah pemakaian berlebihan yang tidak sengaja).
@@ -28,35 +33,40 @@ function isRateLimited(ip) {
   return entry.count > MAX_PER_WINDOW;
 }
 
+// ---------------- Fallback umpan balik statis ----------------
+// Dipakai kalau panggilan ke Gemini gagal (mis. limit gratis tercapai),
+// supaya siswa tetap dapat semacam catatan untuk lanjut berlatih.
+// Ini BUKAN analisis AI sungguhan atas draf mereka.
+const FALLBACK_TEMPLATES = [
+  "Draf kamu sudah punya alur yang bisa diikuti. Coba periksa lagi: apakah setiap tokoh punya alasan yang jelas untuk bertindak seperti itu? Perkuat juga deskripsi latar (waktu & tempat) di bagian awal supaya pembaca lebih cepat masuk ke suasana cerita.",
+  "Konfliknya sudah mulai terasa. Coba tambahkan lebih banyak dialog atau reaksi batin tokoh utama saat menghadapi masalah, supaya pembaca ikut merasakan tekanan yang dia alami. Perhatikan juga transisi antar paragraf agar tidak terasa loncat.",
+  "Bagian pembuka cukup menarik perhatian. Untuk revisi berikutnya, coba perkuat bagian klimaks: perlambat momen paling tegang dengan detail sensorik (apa yang dilihat, didengar, dirasakan tokoh) supaya lebih terasa dramatis.",
+  "Struktur cerita (awal-tengah-akhir) sudah kelihatan. Sekarang coba baca ulang dan tandai kalimat yang masih 'menjelaskan' perasaan tokoh secara langsung (misalnya 'dia sedih') lalu ganti dengan menunjukkan lewat tindakan atau ekspresi.",
+  "Ceritamu sudah punya penutup. Coba cek lagi apakah penutup itu menjawab konflik yang dibangun di awal, atau malah terasa terlalu terburu-buru. Menambah satu-dua kalimat refleksi tokoh di akhir bisa membuat pesan cerita terasa lebih kuat.",
+];
+
+function pickFallback(prompt) {
+  const idx = prompt.length % FALLBACK_TEMPLATES.length;
+  return (
+    "[Catatan: layanan AI sedang tidak tersedia sementara, jadi ini adalah " +
+    "catatan umum, bukan analisis khusus atas draf kamu.]\n\n" +
+    FALLBACK_TEMPLATES[idx]
+  );
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: "Method not allowed" }),
-    };
+    return { statusCode: 405, body: JSON.stringify({ error: "Method not allowed" }) };
   }
 
-  if (!ANTHROPIC_API_KEY) {
-    console.error(
-      "ANTHROPIC_API_KEY belum diatur di Netlify Environment Variables."
-    );
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "Server belum dikonfigurasi." }),
-    };
+  if (!GEMINI_API_KEY) {
+    console.error("GEMINI_API_KEY belum diatur di Netlify Environment Variables.");
+    return { statusCode: 500, body: JSON.stringify({ error: "Server belum dikonfigurasi." }) };
   }
 
-  const ip =
-    event.headers["x-nf-client-connection-ip"] ||
-    event.headers["client-ip"] ||
-    "unknown";
+  const ip = event.headers["x-nf-client-connection-ip"] || event.headers["client-ip"] || "unknown";
   if (isRateLimited(ip)) {
-    return {
-      statusCode: 429,
-      body: JSON.stringify({
-        error: "Terlalu banyak permintaan, coba lagi sebentar.",
-      }),
-    };
+    return { statusCode: 429, body: JSON.stringify({ error: "Terlalu banyak permintaan, coba lagi sebentar." }) };
   }
 
   let prompt;
@@ -64,60 +74,64 @@ exports.handler = async (event) => {
     const parsed = JSON.parse(event.body || "{}");
     prompt = parsed.prompt;
   } catch {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ error: "Body harus JSON valid." }),
-    };
+    return { statusCode: 400, body: JSON.stringify({ error: "Body harus JSON valid." }) };
   }
 
   if (!prompt || typeof prompt !== "string") {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ error: "Field 'prompt' wajib diisi (string)." }),
-    };
+    return { statusCode: 400, body: JSON.stringify({ error: "Field 'prompt' wajib diisi (string)." }) };
   }
   if (prompt.length > 20000) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ error: "Prompt terlalu panjang." }),
-    };
+    return { statusCode: 400, body: JSON.stringify({ error: "Prompt terlalu panjang." }) };
   }
 
+  const url =
+    `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+
   try {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetch(url, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": ANTHROPIC_API_KEY,
-        "anthropic-version": "2023-06-01",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "claude-sonnet-5",
-        max_tokens: 1500,
-        messages: [{ role: "user", content: prompt }],
+        contents: [{ parts: [{ text: prompt }] }],
       }),
     });
 
     if (!response.ok) {
       const errText = await response.text();
-      console.error("Anthropic API error:", response.status, errText);
+      console.error("Gemini API error (memakai fallback statis):", response.status, errText);
       return {
-        statusCode: 502,
-        body: JSON.stringify({ error: "Gagal menghubungi layanan AI." }),
+        statusCode: 200,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: [{ type: "text", text: pickFallback(prompt) }] }),
       };
     }
 
     const data = await response.json();
+    const text =
+      data?.candidates?.[0]?.content?.parts?.map((p) => p.text || "").join("") || "";
+
+    if (!text) {
+      console.error("Gemini merespons tanpa teks (memakai fallback statis):", JSON.stringify(data));
+      return {
+        statusCode: 200,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: [{ type: "text", text: pickFallback(prompt) }] }),
+      };
+    }
+
+    // Disamakan dengan format yang diharapkan frontend (gaya Anthropic),
+    // supaya index.html tidak perlu diubah sama sekali.
     return {
       statusCode: 200,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ content: [{ type: "text", text }] }),
     };
   } catch (err) {
-    console.error("Function error:", err);
+    console.error("Function error (memakai fallback statis):", err);
     return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "Terjadi kesalahan pada server." }),
+      statusCode: 200,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content: [{ type: "text", text: pickFallback(prompt) }] }),
     };
   }
 };
